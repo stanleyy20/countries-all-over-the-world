@@ -5,10 +5,18 @@ import { useState } from 'react';
 import { DarkTheme, LightTheme, Typography } from './styles/theme';
 
 function App() {
-    const [theme, setTheme] = useState('light');
+    const initialTheme = localStorage.getItem('theme') || 'light';
+
+    const [theme, setTheme] = useState(initialTheme);
 
     const themeToggler = () => {
-        theme === 'light' ? setTheme('dark') : setTheme('light');
+        if (theme === 'light') {
+            setTheme('dark');
+            localStorage.setItem('theme', 'dark');
+        } else if (theme === 'dark') {
+            setTheme('light');
+            localStorage.setItem('theme', 'light');
+        }
     };
 
     return (
