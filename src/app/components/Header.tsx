@@ -77,5 +77,5 @@ const ThemeModeButton = styled.button`
     border: none;
     cursor: pointer;
     color: ${({ theme }) => theme.text_color};
-    font-size: 16px;
+    font-size: 13px;
 `;

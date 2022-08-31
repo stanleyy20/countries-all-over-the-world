@@ -1,39 +1,32 @@
-// import { useEffect } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useFetch } from '../hooks/useFetch';
+import { CountryItem } from './CountryItem';
+import LoadingIndicator from './LoadingIndicator';
 
 export const Countries = () => {
-    const [countries, setCountries] = useState<Array<string>>([]);
+    const [countries, setCountries] = useState<any>([]);
 
-    const { fetch: getCountries } = useFetch((countries) => {
+    const { fetch: getCountries, isLoading } = useFetch((countries) => {
         setCountries(countries);
     });
 
     useEffect(() => {
         getCountries();
-    }, [getCountries]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    return <Container></Container>;
+    return (
+        <Container>
+            <LoadingIndicator isLoading={isLoading} />
+            <CountryItem countries={countries} />
+        </Container>
+    );
 };
 
 const Container = styled.div`
     min-height: 100vh;
-    width: 100vw;
     background-color: ${({ theme }) => theme.background_color};
     color: ${({ theme }) => theme.text_color};
 `;
-
-// border_countries: country.borders,
-//                             capital: country.capital,
-//                             currencies: country.currencies,
-//                             domain: country.tld,
-//                             flag: country.flags.png,
-//                             lang: country.languages,
-//                             name: country.name.common,
-//                             native_name: country.name.nativeName,
-//                             population: country.population,
-//                             region: country.region,
-//                             sub_region: country.subregion,
-//                             error: isError,

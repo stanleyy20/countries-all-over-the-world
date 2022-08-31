@@ -1,9 +1,11 @@
-import { usePromiseTracker } from 'react-promise-tracker';
 import { TailSpin } from 'react-loader-spinner';
 
-const LoadingIndicator = () => {
-    const { promiseInProgress } = usePromiseTracker();
-    if (promiseInProgress)
+type LoadingIndicatorProps = {
+    isLoading: boolean;
+};
+
+const LoadingIndicator: React.FunctionComponent<LoadingIndicatorProps> = ({ isLoading }) => {
+    if (isLoading)
         return (
             <div
                 style={{
