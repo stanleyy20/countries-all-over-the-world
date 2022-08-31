@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { Header } from './components/Header';
 import { Countries } from './components/Countries';
@@ -8,7 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { DarkTheme, LightTheme, Typography } from './styles/theme';
 
 import './styles/theme.ts';
-import LoadingIndicator from './components/LoadingIndicator';
+import { CountryDetails } from './components/CountryDetails';
 
 function App() {
     const initialTheme = localStorage.getItem('theme') || 'light';
@@ -30,8 +30,10 @@ function App() {
             <div className='App'>
                 <ThemeProvider theme={Typography}>
                     <Header themeToggler={themeToggler} witchModeIsActive={theme} />
-                    <LoadingIndicator />
-                    <Countries />
+                    <Routes>
+                        <Route path='/' element={<Countries />} />
+                        <Route path='/details' element={<CountryDetails />} />
+                    </Routes>
                 </ThemeProvider>
             </div>
         </ThemeProvider>
