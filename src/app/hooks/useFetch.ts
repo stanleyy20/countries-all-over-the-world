@@ -5,7 +5,7 @@ import { CONFIGURATION } from '../config/config';
 
 const { API_URL } = CONFIGURATION;
 
-export const useFetch = (onSuccess: (country: Array<string>) => void) => {
+export const useFetch = (onSuccess: (country: Array<string>) => void, endpoint: string) => {
     const [isError, setIsError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -15,7 +15,7 @@ export const useFetch = (onSuccess: (country: Array<string>) => void) => {
         fetch: () => {
             setIsLoading(true);
             setIsError(false);
-            fetch(`${API_URL}all`)
+            fetch(`${API_URL}${endpoint}`)
                 .then((response) => {
                     if (response.ok) {
                         return response;
