@@ -13,6 +13,7 @@ export const LightTheme: Light = {
     background_color: 'hsl(0, 0%, 98%)',
     input_color: 'hsl(0, 0%, 100%)',
     box_shadow: '0px 9px 14px -4px rgba(66, 68, 90, 1)',
+    border: '2px solid black',
 };
 
 export const Typography: Typography_Media = {

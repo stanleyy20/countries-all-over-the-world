@@ -43,6 +43,7 @@ const Item = styled.div`
     min-height: 330px;
     cursor: pointer;
     border-radius: 6px;
+    box-shadow: ${({ theme }) => theme.box_shadow};
 
     @media screen and (min-width: ${({ theme }) => theme.media.sm}) {
         width: 38%;

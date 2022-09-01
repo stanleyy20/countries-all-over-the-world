@@ -69,6 +69,7 @@ const MainContent = styled.header`
 
 const Title = styled.h2`
     color: ${({ theme }) => theme.text_color};
+    font-size: 20px;
 `;
 
 const ThemeModeButton = styled.button`
@@ -77,5 +78,5 @@ const ThemeModeButton = styled.button`
     border: none;
     cursor: pointer;
     color: ${({ theme }) => theme.text_color};
-    font-size: 13px;
+    font-size: 14px;
 `;

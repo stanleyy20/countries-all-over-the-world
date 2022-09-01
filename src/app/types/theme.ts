@@ -4,6 +4,7 @@ export type Light = {
     background_color: string;
     input_color: string;
     box_shadow: string;
+    border: string;
 };
 
 export type Dark = {
