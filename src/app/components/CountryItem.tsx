@@ -1,28 +1,23 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type CountryItemProps = {
     countries: any;
 };
 
 export const CountryItem: React.FunctionComponent<CountryItemProps> = ({ countries }) => {
-    const navigate = useNavigate();
-
-    const showCountryDetails = () => {
-        console.log('działa');
-        navigate('/details');
-    };
-
     const countriesList = countries.map((country: any) => {
         return (
-            <Item key={country.name.common} onClick={showCountryDetails}>
-                <Img src={country.flags.png}></Img>
-                <ItemBody>
-                    <Title>{country.name.common}</Title>
-                    <Text>Population: {country.population}</Text>
-                    <Text>Region: {country.region} </Text>
-                    <Text>Capital: {country.capital}</Text>
-                </ItemBody>
+            <Item key={country.name.common}>
+                <StyledLink to={`country/${country.cioc}`}>
+                    <Img src={country.flags.png}></Img>
+                    <ItemBody>
+                        <Title>{country.name.common}</Title>
+                        <Text>Population: {country.population}</Text>
+                        <Text>Region: {country.region} </Text>
+                        <Text>Capital: {country.capital}</Text>
+                    </ItemBody>
+                </StyledLink>
             </Item>
         );
     });
@@ -70,21 +65,21 @@ const ItemBody = styled.div`
     margin-left: 20px;
     margin-top: 20px;
 `;
-const Text = styled.p``;
+const Text = styled.p`
+    color: ${({ theme }) => theme.text_color};
+`;
 const Title = styled.h3`
     margin-bottom: 10px;
+    color: ${({ theme }) => theme.text_color};
 `;
 const Img = styled.img`
     max-width: 100%;
     border-radius: 6px;
 `;
 
-//                             border_countries: country.borders,
-//                             currencies: country.currencies,
-//                             domain: country.tld,
-//                             flag: country.flags.png,
-//                             lang: country.languages,
-//                             name: country.name.common,
-//                             native_name: country.name.nativeName,
-//                             sub_region: country.subregion,
-//
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: ${({ theme }) => theme.text_color};
+    display: block;
+    height: 100%;
+`;

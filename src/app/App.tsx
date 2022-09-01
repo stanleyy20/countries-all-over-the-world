@@ -32,7 +32,7 @@ function App() {
                     <Header themeToggler={themeToggler} witchModeIsActive={theme} />
                     <Routes>
                         <Route path='/' element={<Countries />} />
-                        <Route path='/details' element={<CountryDetails />} />
+                        <Route path='/country/:countryCode' element={<CountryDetails />} />
                     </Routes>
                 </ThemeProvider>
             </div>
