@@ -12,6 +12,7 @@ export const LightTheme: Light = {
     items_color: 'hsl(0, 0%, 100%)',
     background_color: 'hsl(0, 0%, 98%)',
     input_color: 'hsl(0, 0%, 100%)',
+    box_shadow: '0px 9px 14px -4px rgba(66, 68, 90, 1)',
 };
 
 export const Typography: Typography_Media = {
