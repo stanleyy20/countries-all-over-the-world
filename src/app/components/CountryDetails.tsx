@@ -127,6 +127,7 @@ const CountryDetailsBody = styled.div`
     }
 
     @media (min-width: ${({ theme }) => theme.media.xl}) {
+        line-height: 30px;
         flex-direction: row;
         gap: 150px;
     }
@@ -136,9 +137,6 @@ const CountryFlag = styled.img`
     width: 100%;
     aspect-ratio: 320/ 213;
     border: ${({ theme }) => theme.border};
-
-    @media (min-width: ${({ theme }) => theme.media.md}) {
-    }
 `;
 
 const CountryInfo = styled.div`
