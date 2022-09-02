@@ -28,6 +28,13 @@ const Container = styled.div`
     flex-direction: column;
     gap: 5px;
     padding-top: 25px;
+
+    @media (min-width: ${({ theme }) => theme.media.xl}) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
 `;
 
 const Countries = styled.div`

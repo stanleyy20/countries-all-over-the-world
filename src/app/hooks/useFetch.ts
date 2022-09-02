@@ -6,14 +6,14 @@ import { apiData } from '../types/apiData';
 
 const { API_URL } = CONFIGURATION;
 
-export const useFetch = (onSuccess: (country: Array<apiData>) => void, endpoint: string) => {
+export const useFetch = (onSuccess: (country: Array<apiData>) => void) => {
     const [isError, setIsError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     return {
         isLoading,
         isError,
-        fetch: () => {
+        fetch: (endpoint: string) => {
             setIsLoading(true);
             setIsError(false);
             fetch(`${API_URL}${endpoint}`)

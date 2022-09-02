@@ -17,12 +17,10 @@ export const CountryDetails: React.FunctionComponent = () => {
 
     const { fetch: getCountry, isLoading } = useFetch((country) => {
         setCountry(country);
-    }, `alpha/${countryCode}`);
-
-    console.log(country);
+    });
 
     useEffect(() => {
-        getCountry();
+        getCountry(`alpha/${countryCode}`);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [countryCode]);
 
@@ -59,14 +57,20 @@ export const CountryDetails: React.FunctionComponent = () => {
                     <CountryFlag src={FLAG_SRC}></CountryFlag>
                     <CountryInfo>
                         <Title>{NAME}</Title>
-                        <Text>Native Name: {NATIVE_NAME} </Text>
-                        <Text>Population: {POPULATION}</Text>
-                        <Text>Region: {REGION} </Text>
-                        <Text>Sub Region: {SUB_REGION}</Text>
-                        <Text style={{ marginBottom: '20px' }}>Capital: {CAPITAL}</Text>
-                        <Text>Top Level Domain: {DOMAIN}</Text>
-                        {CURRENCIES}
-                        <Text>Languages: {LANG}</Text>
+                        <TextContainer>
+                            {' '}
+                            <Text>Native Name: {NATIVE_NAME} </Text>
+                            <Text>Population: {POPULATION}</Text>
+                            <Text>Region: {REGION} </Text>
+                            <Text>Sub Region: {SUB_REGION}</Text>
+                            <Text style={{ marginBottom: '20px' }}>Capital: {CAPITAL}</Text>
+                        </TextContainer>
+                        <TextContainer>
+                            <Text>Top Level Domain: {DOMAIN}</Text>
+                            {CURRENCIES}
+                            <Text>Languages: {LANG}</Text>
+                        </TextContainer>
+
                         <BorderCountries country={country} />
                     </CountryInfo>
                 </CountryDetailsBody>
@@ -90,7 +94,11 @@ const Wrapper = styled.div`
     width: 90%;
 
     @media (min-width: ${({ theme }) => theme.media.md}) {
-        width: 70%;
+        width: 60%;
+    }
+
+    @media (min-width: ${({ theme }) => theme.media.xl}) {
+        width: 80%;
     }
 `;
 
@@ -115,9 +123,12 @@ const CountryDetailsBody = styled.div`
     align-items: center;
 
     @media (min-width: ${({ theme }) => theme.media.md}) {
+        font-size: ${({ theme }) => theme.font_size.details}px;
+    }
+
+    @media (min-width: ${({ theme }) => theme.media.xl}) {
         flex-direction: row;
         gap: 150px;
-        font-size: ${({ theme }) => theme.font_size.details}px;
     }
 `;
 
@@ -125,6 +136,9 @@ const CountryFlag = styled.img`
     width: 100%;
     aspect-ratio: 320/ 213;
     border: ${({ theme }) => theme.border};
+
+    @media (min-width: ${({ theme }) => theme.media.md}) {
+    }
 `;
 
 const CountryInfo = styled.div`
@@ -132,6 +146,12 @@ const CountryInfo = styled.div`
     display: flex;
     flex-direction: column;
     gap: 6px;
+
+    @media (min-width: ${({ theme }) => theme.media.xl}) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 50px auto auto;
+    }
 `;
 
 const Text = styled.p`
@@ -141,4 +161,13 @@ const Text = styled.p`
 const Title = styled.h3`
     margin-bottom: 10px;
     color: ${({ theme }) => theme.text_color};
+
+    @media (min-width: ${({ theme }) => theme.media.xl}) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
 `;
+
+const TextContainer = styled.div``;
