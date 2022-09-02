@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/countries-all-over-the-world/static/css/main.c7ec3132.css",
-    "main.js": "/countries-all-over-the-world/static/js/main.eb5f4d10.js",
+    "main.js": "/countries-all-over-the-world/static/js/main.34bd1494.js",
     "index.html": "/countries-all-over-the-world/index.html",
     "main.c7ec3132.css.map": "/countries-all-over-the-world/static/css/main.c7ec3132.css.map",
-    "main.eb5f4d10.js.map": "/countries-all-over-the-world/static/js/main.eb5f4d10.js.map"
+    "main.34bd1494.js.map": "/countries-all-over-the-world/static/js/main.34bd1494.js.map"
   },
   "entrypoints": [
     "static/css/main.c7ec3132.css",
-    "static/js/main.eb5f4d10.js"
+    "static/js/main.34bd1494.js"
   ]
 }
