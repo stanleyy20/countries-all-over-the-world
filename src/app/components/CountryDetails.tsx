@@ -8,15 +8,18 @@ import { useState, useEffect } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import LoadingIndicator from './LoadingIndicator';
 import { BorderCountries } from './BorderCountries';
+import { apiData } from '../types/apiData';
 
 export const CountryDetails: React.FunctionComponent = () => {
-    const [country, setCountry] = useState<any>([]);
+    const [country, setCountry] = useState<Array<apiData>>([]);
     const navigate = useNavigate();
     const { countryCode } = useParams();
 
     const { fetch: getCountry, isLoading } = useFetch((country) => {
         setCountry(country);
     }, `alpha/${countryCode}`);
+
+    console.log(country);
 
     useEffect(() => {
         getCountry();
@@ -27,12 +30,12 @@ export const CountryDetails: React.FunctionComponent = () => {
         navigate('/');
     };
 
-    const NATIVE_NAME =
+    const NATIVE_NAME: string =
         country[0]?.name.nativeName[Object.keys(country[0]?.name.nativeName)[0]].official;
 
     const NAME = country[0]?.name.common;
     const FLAG_SRC = country[0]?.flags.png;
-    const POPULATION = Intl.NumberFormat().format(country[0]?.population);
+    const POPULATION = Intl.NumberFormat().format(Number(country[0]?.population));
     const REGION = country[0]?.region;
     const SUB_REGION = country[0]?.subregion;
     const DOMAIN = country[0]?.tld && country[0]?.tld.map((domain: any) => domain).join(' ');
@@ -85,6 +88,10 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     width: 90%;
+
+    @media (min-width: ${({ theme }) => theme.media.md}) {
+        width: 70%;
+    }
 `;
 
 const BackButton = styled.button`
@@ -106,6 +113,12 @@ const CountryDetailsBody = styled.div`
     width: 100%;
     height: 100%;
     align-items: center;
+
+    @media (min-width: ${({ theme }) => theme.media.md}) {
+        flex-direction: row;
+        gap: 150px;
+        font-size: ${({ theme }) => theme.font_size.details}px;
+    }
 `;
 
 const CountryFlag = styled.img`

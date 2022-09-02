@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { apiData } from '../types/apiData';
+
 type CountryItemProps = {
-    countries: any;
+    countries: Array<apiData>;
 };
 
 export const CountryItem: React.FunctionComponent<CountryItemProps> = ({ countries }) => {
-    const countriesList = countries.map((country: any) => {
+    const countriesList = countries.map((country: apiData) => {
         return (
             <Item key={country.name.common}>
                 <StyledLink to={`country/${country.cioc}`}>
                     <Img src={country.flags.png}></Img>
                     <ItemBody>
                         <Title>{country.name.common}</Title>
-                        <Text>Population: {country.population}</Text>
+                        <Text>
+                            Population: {Intl.NumberFormat().format(Number(country.population))}
+                        </Text>
                         <Text>Region: {country.region} </Text>
                         <Text>Capital: {country.capital}</Text>
                     </ItemBody>
@@ -39,11 +43,12 @@ const Container = styled.div`
 const Item = styled.div`
     background-color: ${({ theme }) => theme.items_color};
     margin-top: 10px;
-    width: 70%;
+    width: 85%;
     min-height: 330px;
     cursor: pointer;
     border-radius: 6px;
     box-shadow: ${({ theme }) => theme.box_shadow};
+    padding-bottom: 20px;
 
     @media screen and (min-width: ${({ theme }) => theme.media.sm}) {
         width: 38%;
@@ -59,12 +64,11 @@ const Item = styled.div`
 `;
 
 const ItemBody = styled.div`
-    /* height: 100%; */
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-left: 20px;
-    margin-top: 20px;
+
+    padding: 15px;
 `;
 const Text = styled.p`
     color: ${({ theme }) => theme.text_color};

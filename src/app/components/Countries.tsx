@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFetch } from '../hooks/useFetch';
+import { apiData } from '../types/apiData';
 
 import { CountryItem } from './CountryItem';
 import LoadingIndicator from './LoadingIndicator';
 
 export const Countries: React.FunctionComponent = () => {
-    const [countries, setCountries] = useState<any>([]);
+    const [countries, setCountries] = useState<Array<apiData>>([]);
 
     const { fetch: getCountries, isLoading } = useFetch((countries) => {
         setCountries(countries);

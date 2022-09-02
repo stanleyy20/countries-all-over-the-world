@@ -4,11 +4,14 @@ import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Countries } from './components/Countries';
 
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { DarkTheme, LightTheme, Typography } from './styles/theme';
 
-import './styles/theme.ts';
+import { Dark, Light } from './types/theme';
+
 import { CountryDetails } from './components/CountryDetails';
+
+import './styles/theme.ts';
 
 function App() {
     const initialTheme = localStorage.getItem('theme') || 'light';
@@ -25,8 +28,18 @@ function App() {
         }
     };
 
+    const GlobalStyle = createGlobalStyle<{ theme: Dark | Light }>`
+        body {
+            background-color: ${({ theme }) => theme.background_color};
+            font-family: 'Nunito Sans', sans-serif;
+            min-height: 100vh;
+            letter-spacing: 1px;
+        }
+    `;
+
     return (
         <ThemeProvider theme={theme === 'light' ? LightTheme : DarkTheme}>
+            <GlobalStyle />
             <div className='App'>
                 <ThemeProvider theme={Typography}>
                     <Header themeToggler={themeToggler} witchModeIsActive={theme} />
