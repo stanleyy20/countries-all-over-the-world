@@ -38,6 +38,7 @@ const Container = styled.div`
     justify-content: space-around;
     gap: 20px;
     padding-top: 20px;
+    padding-bottom: 50px;
 `;
 
 const Item = styled.div`
