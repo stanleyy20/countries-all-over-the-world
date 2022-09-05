@@ -9,13 +9,18 @@ import { useFetch } from '../hooks/useFetch';
 import LoadingIndicator from './LoadingIndicator';
 import { BorderCountries } from './BorderCountries';
 import { apiData } from '../types/apiData';
+import { RefreshButton } from './RefreshButton';
 
 export const CountryDetails: React.FunctionComponent = () => {
     const [country, setCountry] = useState<Array<apiData>>([]);
     const navigate = useNavigate();
     const { countryCode } = useParams();
 
-    const { fetch: getCountry, isLoading } = useFetch((country) => {
+    const {
+        fetch: getCountry,
+        isLoading,
+        isError,
+    } = useFetch((country) => {
         setCountry(country);
     });
 
@@ -47,34 +52,38 @@ export const CountryDetails: React.FunctionComponent = () => {
 
     return (
         <Container>
-            <Wrapper>
-                <LoadingIndicator isLoading={isLoading} />
-                <BackButton onClick={forwardPage}>
-                    {' '}
-                    <FontAwesomeIcon icon={faArrowLeftLong} size='lg' /> Back
-                </BackButton>
-                <CountryDetailsBody>
-                    <CountryFlag src={FLAG_SRC}></CountryFlag>
-                    <CountryInfo>
-                        <Title>{NAME}</Title>
-                        <TextContainer>
-                            {' '}
-                            <Text>Native Name: {NATIVE_NAME} </Text>
-                            <Text>Population: {POPULATION}</Text>
-                            <Text>Region: {REGION} </Text>
-                            <Text>Sub Region: {SUB_REGION}</Text>
-                            <Text style={{ marginBottom: '20px' }}>Capital: {CAPITAL}</Text>
-                        </TextContainer>
-                        <TextContainer>
-                            <Text>Top Level Domain: {DOMAIN}</Text>
-                            {CURRENCIES}
-                            <Text>Languages: {LANG}</Text>
-                        </TextContainer>
+            {isError ? (
+                <RefreshButton refresh={getCountry} endpoint={`alpha/${countryCode}`} />
+            ) : (
+                <Wrapper>
+                    <LoadingIndicator isLoading={isLoading} />
+                    <BackButton onClick={forwardPage}>
+                        {' '}
+                        <FontAwesomeIcon icon={faArrowLeftLong} size='lg' /> Back
+                    </BackButton>
+                    <CountryDetailsBody>
+                        <CountryFlag src={FLAG_SRC}></CountryFlag>
+                        <CountryInfo>
+                            <Title>{NAME}</Title>
+                            <TextContainer>
+                                {' '}
+                                <Text>Native Name: {NATIVE_NAME} </Text>
+                                <Text>Population: {POPULATION}</Text>
+                                <Text>Region: {REGION} </Text>
+                                <Text>Sub Region: {SUB_REGION}</Text>
+                                <Text style={{ marginBottom: '20px' }}>Capital: {CAPITAL}</Text>
+                            </TextContainer>
+                            <TextContainer>
+                                <Text>Top Level Domain: {DOMAIN}</Text>
+                                {CURRENCIES}
+                                <Text>Languages: {LANG}</Text>
+                            </TextContainer>
 
-                        <BorderCountries country={country} />
-                    </CountryInfo>
-                </CountryDetailsBody>
-            </Wrapper>
+                            <BorderCountries country={country} />
+                        </CountryInfo>
+                    </CountryDetailsBody>
+                </Wrapper>
+            )}
         </Container>
     );
 };

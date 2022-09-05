@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { apiData } from '../types/apiData';
 
 type BorderCountriesProps = {
-    country: any;
+    country: Array<apiData>;
 };
 
 export const BorderCountries: React.FunctionComponent<BorderCountriesProps> = ({ country }) => {
-    const BORDER_COUNTRIES =
-        country[0]?.borders &&
-        country[0]?.borders.map((country: any) => (
-            <StyledLink to={`/country/${country}`} key={country}>
-                {' '}
-                {country}
-            </StyledLink>
-        ));
+    const BORDER_COUNTRIES = country[0]?.borders
+        ? country[0]?.borders.map((country: any) => (
+              <StyledLink to={`/country/${country}`} key={country}>
+                  {' '}
+                  {country}
+              </StyledLink>
+          ))
+        : 'This country has no neighboring';
 
     return (
         <Container>

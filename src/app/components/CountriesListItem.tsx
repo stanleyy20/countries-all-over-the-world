@@ -7,11 +7,11 @@ type CountryItemProps = {
     countries: Array<apiData>;
 };
 
-export const CountryItem: React.FunctionComponent<CountryItemProps> = ({ countries }) => {
+export const CountriesListItem: React.FunctionComponent<CountryItemProps> = ({ countries }) => {
     const countriesList = countries.map((country: apiData) => {
         return (
             <Item key={country.name.common}>
-                <StyledLink to={`country/${country.cioc}`}>
+                <StyledLink to={`country/${country.cioc ?? country.cca3}`}>
                     <Img src={country.flags.png}></Img>
                     <ItemBody>
                         <Title>{country.name.common}</Title>
@@ -49,7 +49,6 @@ const Item = styled.div`
     cursor: pointer;
     border-radius: 6px;
     box-shadow: ${({ theme }) => theme.box_shadow};
-    padding-bottom: 20px;
 
     @media screen and (min-width: ${({ theme }) => theme.media.sm}) {
         width: 38%;

@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import { useFetch } from '../hooks/useFetch';
 import { apiData } from '../types/apiData';
 
-import { CountryItem } from './CountryItem';
+import { CountriesListItem } from './CountriesListItem';
 import { FilteredRegion } from './FilteredRegion';
 import LoadingIndicator from './LoadingIndicator';
+import { RefreshButton } from './RefreshButton';
 import { SearchCountry } from './SearchCountry';
 
-export const Countries: React.FunctionComponent = () => {
+export const CountriesList: React.FunctionComponent = () => {
     const [countries, setCountries] = useState<Array<apiData>>([]);
 
-    const { fetch: getCountries, isLoading } = useFetch((countries) => {
+    const {
+        fetch: getCountries,
+        isLoading,
+        isError,
+    } = useFetch((countries) => {
         setCountries(countries);
     });
 
@@ -22,12 +27,18 @@ export const Countries: React.FunctionComponent = () => {
 
     return (
         <Container>
-            <Form>
-                <SearchCountry setCountries={setCountries} />
-                <FilteredRegion setCountries={setCountries} />
-            </Form>
-            <LoadingIndicator isLoading={isLoading} />
-            <CountryItem countries={countries} />
+            {isError ? (
+                <RefreshButton refresh={getCountries} endpoint='all' />
+            ) : (
+                <>
+                    <LoadingIndicator isLoading={isLoading} />
+                    <Form>
+                        <SearchCountry setCountries={setCountries} />
+                        <FilteredRegion setCountries={setCountries} />
+                    </Form>
+                    <CountriesListItem countries={countries} />
+                </>
+            )}
         </Container>
     );
 };

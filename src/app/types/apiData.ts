@@ -18,4 +18,6 @@ export interface apiData {
     tld: [];
     currencies: [];
     cioc: string;
+    cca3: string;
+    borders: [];
 }

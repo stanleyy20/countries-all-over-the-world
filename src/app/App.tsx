@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { Header } from './components/Header';
-import { Countries } from './components/Countries';
+import { CountriesList } from './components/CountriesList';
 
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { DarkTheme, LightTheme, Typography } from './styles/theme';
@@ -44,7 +44,7 @@ function App() {
                 <ThemeProvider theme={Typography}>
                     <Header themeToggler={themeToggler} witchModeIsActive={theme} />
                     <Routes>
-                        <Route path='/' element={<Countries />} />
+                        <Route path='/' element={<CountriesList />} />
                         <Route path='/country/:countryCode' element={<CountryDetails />} />
                     </Routes>
                 </ThemeProvider>

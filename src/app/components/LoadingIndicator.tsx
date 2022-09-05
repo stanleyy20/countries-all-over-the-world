@@ -17,7 +17,7 @@ const LoadingIndicator: React.FunctionComponent<LoadingIndicatorProps> = ({ isLo
                     alignItems: 'center',
                     left: 0,
                 }}>
-                <TailSpin color='#ff3d4f' height={40} width={40} />
+                <TailSpin color='#ff3d4f' height={80} width={80} />
             </div>
         );
     else return null;
