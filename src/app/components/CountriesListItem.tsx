@@ -12,7 +12,7 @@ export const CountriesListItem: React.FunctionComponent<CountryItemProps> = ({ c
         return (
             <Item key={country.name.common}>
                 <StyledLink to={`country/${country.cioc ?? country.cca3}`}>
-                    <Img src={country.flags.png}></Img>
+                    <Img src={country.flags.png} alt='country flag'></Img>
                     <ItemBody>
                         <Title>{country.name.common}</Title>
                         <Text>
